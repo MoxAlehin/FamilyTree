@@ -1,0 +1,11 @@
+.vscode 
+*.iml
+.idea
+*.map
+node_modules
+
+main.js
+data.json
+
+# Test environment
+**/.obsidian/**
