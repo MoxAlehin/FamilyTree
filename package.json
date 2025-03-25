@@ -12,6 +12,7 @@
 	"author": "Mox Alehin",
 	"license": "MIT",
 	"devDependencies": {
+		"@types/d3": "^7.4.3",
 		"@types/node": "^16.11.6",
 		"@types/sortablejs": "^1.15.8",
 		"@typescript-eslint/eslint-plugin": "5.29.0",
@@ -26,6 +27,8 @@
 	},
 	"dependencies": {
 		"@popperjs/core": "^2.11.8",
+		"d3": "^7.9.0",
+		"family-chart": "^0.2.1",
 		"sortablejs": "^1.15.2"
 	}
 }

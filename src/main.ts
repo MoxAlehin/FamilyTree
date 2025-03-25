@@ -1,13 +1,18 @@
-import { Plugin } from 'obsidian';
+import { Plugin, TFile } from 'obsidian';
 import { SettingTab, FamilyTreeSettings, DEFAULT_SETTINGS } from "settings"
-import { PersonModal } from 'modals/person-modal';
+import { addCommands } from 'commands';
+import { registerView } from 'view';
+import { collectFamilyTree } from 'tree-data';
 
 export default class FamilyTreePlugin extends Plugin {
 	settings: FamilyTreeSettings;
 	async onload() {
 		await this.loadSettings();
 		this.addSettingTab(new SettingTab(this.app, this));
-		this.addCommands();
+		addCommands(this);
+		registerView(this);
+		// const file = this.app.vault.getFileByPath("Father.md") as TFile;
+        // const familyTree = await collectFamilyTree(this.app, file);
 	}
 
 	async loadSettings() {
@@ -16,19 +21,5 @@ export default class FamilyTreePlugin extends Plugin {
 
 	async saveSettings() {
 		await this.saveData(this.settings);;
-	}
-
-	addCommands() {
-		this.addCommand({
-			id: "edit-person",
-			name: "Edit person",
-			checkCallback: (checking) => {
-				const activeFile = this.app.workspace.getActiveFile();
-				if (!checking && activeFile) {
-					new PersonModal(this.app, activeFile).open();
-				}
-				return !!activeFile;
-			},
-		});
 	}
 }
