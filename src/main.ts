@@ -1,4 +1,4 @@
-import { Plugin, TFile } from 'obsidian';
+import { normalizePath, Plugin, TFile } from 'obsidian';
 import { SettingTab, FamilyTreeSettings, DEFAULT_SETTINGS } from "settings"
 import { addCommands } from 'commands';
 import { registerView } from 'view';
@@ -11,8 +11,10 @@ export default class FamilyTreePlugin extends Plugin {
 		this.addSettingTab(new SettingTab(this.app, this));
 		addCommands(this);
 		registerView(this);
-		// const file = this.app.vault.getFileByPath("Father.md") as TFile;
-        // const familyTree = await collectFamilyTree(this.app, file);
+		const file = this.app.vault.getFileByPath("Father.md") as TFile;
+		console.log(file)
+        const familyTree = await collectFamilyTree(this.app, file);
+        console.log(familyTree);
 	}
 
 	async loadSettings() {
